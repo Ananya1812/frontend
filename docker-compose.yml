@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: .
+    image: ananyakini18/frontend:latest
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
