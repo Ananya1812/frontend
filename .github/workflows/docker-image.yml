@@ -2,7 +2,8 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build-and-push:
@@ -27,3 +28,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ananyakini18/frontend:latest
+          platforms: linux/amd64
