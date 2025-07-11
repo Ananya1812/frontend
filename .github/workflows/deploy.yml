@@ -13,18 +13,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Debug Secrets (remove in production)
-        run: |
-          echo "HOST: ${{ secrets.HOST }}"
-          echo "USERNAME: ${{ secrets.USERNAME }}"
-          echo "HOST_SSH_KEY is set: ${{ secrets.HOST_SSH_KEY != '' }}"
-          
-
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.HOST_SSH_KEY }}
+          passphrase: ""
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+            docker stop frontend || true
+            docker rm frontend || true
+            docker run -d --name frontend -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
           key: ${{ secrets.HOST_SSH_KEY }}
           passphrase: ""
           script: |
