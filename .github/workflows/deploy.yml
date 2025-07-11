@@ -13,12 +13,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Debug Secrets (remove in production)
+        run: |
+          echo "HOST: ${{ secrets.HOST }}"
+          echo "USERNAME: ${{ secrets.USERNAME }}"
+          echo "HOST_SSH_KEY is set: ${{ secrets.HOST_SSH_KEY != '' }}"
+          
+
       - name: Deploy via SSH
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.HOST_SSH_KEY }}
+          passphrase: ""
           script: |
             cd /home/azureuser/frontend
             git pull origin main
