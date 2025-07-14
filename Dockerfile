@@ -1,4 +1,9 @@
-# Simple Dockerfile for static frontend
-FROM nginx:alpine
-COPY . /usr/share/nginx/html
-EXPOSE 80
+# Dockerfile for React app
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npx", "serve", "-s", "build", "-l", "3000"]
