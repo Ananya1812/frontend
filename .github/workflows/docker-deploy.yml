@@ -8,7 +8,6 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      # ...existing code from docker.yml...
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -24,8 +23,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./bootcamp
+          file: ./bootcamp/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
 
