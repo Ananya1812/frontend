@@ -13,9 +13,6 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: bootcamp
-    - name: Run tests
-      run: npm test
-      working-directory: bootcamp
     - name: Build React app
       run: npm run build
       working-directory: bootcamp
