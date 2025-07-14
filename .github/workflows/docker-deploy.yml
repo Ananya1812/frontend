@@ -23,8 +23,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: frontend/bootcamp
-          file: frontend/Dockerfile
+          context: ../bootcamp
+          file: ../Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
 
