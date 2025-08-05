@@ -16,3 +16,6 @@ jobs:
     - name: Build React app
       run: npm run build
       working-directory: bootcamp
+    - name: Run integration tests
+      run: npm test
+      working-directory: bootcamp
