@@ -19,3 +19,8 @@ jobs:
     - name: Run integration tests
       run: npm test
       working-directory: bootcamp
+    - name: Upload test report
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-test-report
+        path: bootcamp/test-results.xml

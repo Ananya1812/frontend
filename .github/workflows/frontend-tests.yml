@@ -1,0 +1,28 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install --force
+        working-directory: bootcamp
+      - name: Build React app
+        run: npm run build
+        working-directory: bootcamp
+      - name: Run integration tests
+        run: npm test
+        working-directory: bootcamp
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-test-report
+          path: bootcamp/test-results.xml
